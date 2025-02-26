@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Prediction</title>
+</head>
+<body>
+    <h1>Fraud Detection</h1>
+    <form id="prediction-form">
+        <label for="cc_num">Card Number: </label><input type="number" id="cc_num" required><br><br>
+        <label for="dob">Date of Birth:</label><input type="date" id="dob" required><br><br>
+        <label for="zip">Zip Code: </label><input type="text" id="zip" required><br><br>
+        <label for="state">State: </label>
+        <select id="state" required>
+            <option value="">Select State</option>
+            <option value="AL">AL</option>
+            <option value="AK">AK</option>
+            <option value="AZ">AZ</option>
+            <option value="AR">AR</option>
+            <option value="AS">AS</option>
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option vlaue="CT">CT</option>
+            <option vlaue="DE">DE</option>
+            <option vlaue="DC">DC</option>
+            <option vlaue="FL">FL</option>
+            <option vlaue="GA">GA</option>
+            <option vlaue="GU">GU</option>
+            <option vlaue="HI">HI</option>
+            <option vlaue="ID">ID</option>
+            <option vlaue="IL">IL</option>
+            <option vlaue="IN">IN</option>
+            <option vlaue="IA">IA</option>
+            <option vlaue="KS">KS</option>
+            <option vlaue="KY">KY</option>
+            <option vlaue="LA">LA</option>
+            <option vlaue="ME">ME</option>
+            <option vlaue="MD">MD</option>
+            <option vlaue="MA">MA</option>
+            <option vlaue="MI">MI</option>
+            <option vlaue="MN">MN</option>
+            <option vlaue="MS">DE</option>
+            <option vlaue="MO">MO</option>
+            <option vlaue="MT">MT</option>
+            <option vlaue="NE">NE</option>
+            <option vlaue="NV">NV</option>
+            <option vlaue="NH">NH</option>
+            <option vlaue="NJ">NJ</option>
+            <option vlaue="NM">NM</option>
+            <option vlaue="NY">NY</option>
+            <option vlaue="NC">NC</option>
+            <option vlaue="ND">ND</option>
+            <option vlaue="MP">MP</option>
+            <option vlaue="OH">OH</option>
+            <option vlaue="OK">OK</option>
+            <option vlaue="OR">OR</option>
+            <option vlaue="PA">PA</option>
+            <option vlaue="PR">PR</option>
+            <option vlaue="RI">RI</option>
+            <option vlaue="SC">SC</option>
+            <option vlaue="SD">SD</option>
+            <option vlaue="TN">TN</option>
+            <option vlaue="TX">TX</option>
+            <option vlaue="TT">TT</option>
+            <option vlaue="UT">UT</option>
+            <option vlaue="VT">VT</option>
+            <option vlaue="VA">VA</option>
+            <option vlaue="VI">VI</option>
+            <option vlaue="WA">WA</option>
+            <option vlaue="WV">WV</option>
+            <option vlaue="WI">WI</option>
+            <option vlaue="WY">WY</option>
+            <!-- Add more states as needed -->
+      </select><br><br>
+        <label for="merchant">Merchant Name: </label><input type="text" id="merchant" required><br><br>
+        <label for="category">Transaction Category: </label><input type="text" id="category" required><br><br>
+        <label for="amt">Amount ($): </label><input type="number" id="amt" step="0.01"required><br><br>
+        <label for="trans_date_trans_time">Transaction datetime: </label><input type="datetime-local" id="trans_date_trans_time" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h3>Prediction: <span id="prediction-result"></span></h3>
+
+    <script>
+        // Handle form submission
+        document.getElementById('prediction-form').onsubmit = async function(event) {
+            event.preventDefault();
+
+            // Collect feature values from the form
+            const features = {
+                cc_num: document.getElementById('cc_num').value,
+                zip: document.getElementById('zip').value,
+                state: document.getElementById('state').value,
+                merchant: document.getElementById('merchant').value,
+                category: document.getElementById('category').value,
+                amt: parseFloat(document.getElementById('amt').value),
+                trans_date_trans_time: document.getElementById('trans_date_trans_time').value,
+                dob: document.getElementById('dob').value  // Capture DOB
+            };
+            // console.log("Sending request with features:", features);  // Debugging log
+
+            try {
+                // Send a POST request to the Flask API
+                const response = await fetch('http://127.0.0.1:5000/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(features)
+                });
+
+                // Parse the response and update the prediction result
+                const data = await response.json();
+                // document.getElementById('prediction-result').textContent = data.prediction === 1 ? 'Fraud' : 'Non-Fraud';
+                document.getElementById('prediction-result').textContent = data.prediction=== 0 ? 'Non-Fraud' : 'Fraud';
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('prediction-result').textContent = 'Error in prediction';
+            }
+        };
+    </script>
+</body>
+</html>

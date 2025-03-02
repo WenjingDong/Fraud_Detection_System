@@ -1,15 +1,24 @@
+from feature_transformer import scale_features, transform_features, FeatureTransformer, FeatureScaler, FeatureSelector
 from flask import Flask, request, jsonify, render_template
 import joblib
+import os
 import numpy as np
 import pandas as pd
 from config import pipeline_ONEHOT_ENCODED_FEATURES, pipeline_LABEL_ENCODED_FEATURES, SCALED_FEATURES, SELECTED_FEATURES
-from feature_transformer import scale_features, transform_features, FeatureTransformer, FeatureScaler, FeatureSelector
+import sys
+# sys.path.append(os.path.dirname(__file__))
+
 
 app = Flask(__name__)
 
 # Load your trained fraud detection model
-pipeline = joblib.load('fraud_detection_model.pkl')  # Adjust the path to your model file
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "fraud_detection_model_fixed.pkl")
+pipeline = joblib.load(MODEL_PATH)  # Adjust the path to your model file
 
+try:
+    pipeline = joblib.load(MODEL_PATH)
+except AttributeError as e:
+    print(f"Error loading model: {e}")
 
 # Serve the HTML page
 @app.route('/')
@@ -23,18 +32,18 @@ def predict():
     try:
         # Get the data from the POST request
         data = request.get_json()  # Expecting JSON data
-        # print("Received data:", data) # Debug 
+        # print("Received data:", data) # Debug
         if not data:
             return jsonify({"error": "Invalid input"}), 400
-        
+
         # Extract features from the input data
         # print(type(data)) # Debug
-        features = pd.DataFrame(data, index=[0]) 
-        # print("Passed features is:")
-        # print(features) # Debug
-        # print(features.dtypes)
-        
-        
+        features = pd.DataFrame(data, index=[0])
+        print("Passed features is:")
+        print(features) # Debug
+        print(features.dtypes)
+
+
         # Debug pipeline step by step
         # print("Debug transformer")
         # features_copy = features.copy()
@@ -47,7 +56,7 @@ def predict():
         # print(features_transformed)
         # prediction = pipeline.named_steps['classifier'].predict(features_transformed)
         # print("prediction:", prediction)
-        
+
         # Make prediction
         prediction = pipeline.predict(features)
         # print("Prediction by the pipeline", prediction)

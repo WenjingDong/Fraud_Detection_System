@@ -102,7 +102,7 @@
 
             try {
                 // Send a POST request to the Flask API - remember to change the port address
-                const response = await fetch('http://0.0.0.0:8080/predict', {
+                const response = await fetch('http://fraud-api-lb-1841315109.us-east-1.elb.amazonaws.com/predict', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

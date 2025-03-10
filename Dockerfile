@@ -1,8 +1,8 @@
 # Use AWS Lambda base image for Python
-# FROM public.ecr.aws/lambda/python:3.9
+FROM public.ecr.aws/lambda/python:3.9
 
 # Not using AWS
-FROM python:3.9
+# FROM python:3.9
 
 # Set working directory
 WORKDIR /Users/wenjingdong/Personal_Projects/Fraud_Detection/fraud_detection_api

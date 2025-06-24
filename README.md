@@ -55,6 +55,8 @@ It combines classic ML models (Logistic Regression & Random Forest) with a light
                           └──────────────┘
 
 
+```
+
 ## Quick Start
 
 ### 1 · Clone & set up a virtual environment
@@ -68,3 +70,4 @@ source .venv/bin/activate     # Windows: .venv\Scripts\activate
 
 pip install --upgrade pip
 pip install -r requirements.txt
+

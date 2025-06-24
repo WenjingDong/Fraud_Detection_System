@@ -53,3 +53,18 @@ It combines classic ML models (Logistic Regression & Random Forest) with a light
                           ┌──────┴───────┐
                           │  ECS Service │
                           └──────────────┘
+
+
+## Quick Start
+
+### 1 · Clone & set up a virtual environment
+```bash
+git clone https://github.com/WenjingDong/Fraud_Detection_System.git
+cd Fraud_Detection_System
+
+# (Optional) Python 3.11 virtual environment
+python -m venv .venv
+source .venv/bin/activate     # Windows: .venv\Scripts\activate
+
+pip install --upgrade pip
+pip install -r requirements.txt

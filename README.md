@@ -9,9 +9,6 @@ It combines classic ML models (Logistic Regression & Random Forest) with a light
 1. [Features](#features)  
 2. [Architecture](#architecture)  
 3. [Quick Start](#quick-start)  
-4. [API Reference](#api-reference)  
-5. [Retraining / Experiments](#retraining--experiments)  
-6. [Deploying to AWS ECS](#deploying-to-aws-ecs)  
 
 ---
 
@@ -23,7 +20,6 @@ It combines classic ML models (Logistic Regression & Random Forest) with a light
 | **API** | Flask app (`app.py`) exposes `/predict`, `/healthz`, `/version` endpoints |
 | **Containerisation** | 17-line `Dockerfile` based on Python 3.11 slim, tini, non-root user |
 | **CI/CD-ready** | Clean `requirements.txt`; opinionated for GitHub Actions & Docker Hub / ECR pushes |
-| **Cloud** | Reference Terraform/ECS instructions (see below) for blue-green deployments |
 | **Data** | Trained on the public Kaggle “Credit Card Fraud Detection” dataset (284 K txns, 492 fraud) |
 
 ---

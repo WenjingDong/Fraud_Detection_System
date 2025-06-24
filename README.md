@@ -1,7 +1,7 @@
 # Fraud Detection System 🚦💳
 
 An end-to-end machine-learning pipeline that **scores real-time financial transactions for fraud**.  
-It combines classic ML models (Logistic Regression & Random Forest) with a lightweight Flask REST API, is fully containerised with Docker, and is production-ready for AWS ECS (Fargate) behind an Application Load Balancer. :contentReference[oaicite:0]{index=0}
+It combines classic ML models (Logistic Regression & Random Forest) with a lightweight Flask REST API, is fully containerised with Docker, and is production-ready for AWS ECS (Fargate) behind an Application Load Balancer. 
 
 ---
 

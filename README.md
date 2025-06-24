@@ -70,4 +70,14 @@ source .venv/bin/activate     # Windows: .venv\Scripts\activate
 
 pip install --upgrade pip
 pip install -r requirements.txt
+```
+
+### 2 · Run locally (Flask)
+``` bash
+export FLASK_APP=app.py                          # Windows: set FLASK_APP=app.py
+flask run --host 0.0.0.0 --port 5000
+# → Service available at http://localhost:5000
+```
+
+
 

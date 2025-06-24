@@ -12,9 +12,6 @@ It combines classic ML models (Logistic Regression & Random Forest) with a light
 4. [API Reference](#api-reference)  
 5. [Retraining / Experiments](#retraining--experiments)  
 6. [Deploying to AWS ECS](#deploying-to-aws-ecs)  
-7. [Project Structure](#project-structure)  
-8. [Contributing](#contributing)  
-9. [License](#license)  
 
 ---
 
@@ -78,6 +75,11 @@ export FLASK_APP=app.py                          # Windows: set FLASK_APP=app.py
 flask run --host 0.0.0.0 --port 5000
 # → Service available at http://localhost:5000
 ```
-
+### 3 · Container-first workflow (recommended)
+``` bash
+docker build -t fraud-detector:latest .
+docker run -p 8080:5000 fraud-detector:latest
+# → Service available at http://localhost:8080
+```
 
 
